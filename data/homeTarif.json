@@ -1,0 +1,53 @@
+{
+  "home-tarif": [
+    {
+      "id": 1,
+      "name": "Cyber M",
+      "speed": "1 МБить/с",
+      "traffic": "Безлимитный",
+      "accessSpeed": "10 Мбит/с",
+      "price": "23",
+      "image": "/data/oneperson.jpg"
+    },
+    {
+      "id": 2,
+      "name": "Cyber M",
+      "speed": "2 МБить/с",
+      "traffic": "Безлимитный",
+      "accessSpeed": "10 Мбит/с",
+      "price": "228",
+      "image": "/data/twoperson.jpg"
+    },
+    {
+      "id": 3,
+      "name": "Cyber M",
+      "speed": "6 МБить/с",
+      "traffic": "Безлимитный",
+      "accessSpeed": "15 Мбит/с",
+      "price": "228",
+      "image": "/data/threeperson.jpg"
+    },
+    {
+      "id": 4,
+      "name": "Cyber L",
+      "speed": "9 МБить/с",
+      "traffic": "Безлимитный",
+      "accessSpeed": "20 Мбит/с",
+      "price": "340",
+      "image": "/data/fiveperson.jpg"
+    },
+    {
+      "id": 5,
+      "name": "Cyber XXL",
+      "speed": "20 МБить/с",
+      "traffic": "Безлимитный",
+      "accessSpeed": "20 Мбит/с",
+      "price": "450",
+      "image": "/data/fiveperson.jpg"
+    }
+  ],
+  "stats": {
+    "updatedCount": 8,
+    "deletedCount": 3
+  }
+}
