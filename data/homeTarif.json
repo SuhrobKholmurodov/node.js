@@ -3,7 +3,7 @@
     {
       "id": 1,
       "name": "Cyber M",
-      "speed": "1 ",
+      "speed": "1",
       "traffic": "Безлимитный",
       "accessSpeed": "10",
       "price": "340",
@@ -21,7 +21,7 @@
     {
       "id": 3,
       "name": "Cyber M",
-      "speed": "6",
+      "speed": "5",
       "traffic": "Безлимитный",
       "accessSpeed": "15",
       "price": "228",
@@ -47,7 +47,7 @@
     }
   ],
   "stats": {
-    "updatedCount": 12,
-    "deletedCount": 10
+    "updatedCount": 82,
+    "deletedCount": 31
   }
 }

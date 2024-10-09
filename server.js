@@ -23,6 +23,8 @@ const readUsersFromFile = () => {
   const jsonData = JSON.parse(data);
   return jsonData.users;
 };
+
+// get the users that already logged in
 app.get("/api/users", (req, res) => {
   const users = readUsersFromFile();
   res.json(users);
@@ -106,7 +108,10 @@ app.post("/api/home-tarif", upload.single("image"), (req, res) => {
       if (err) {
         return res.status(500).send("Ошибка записи данных");
       }
-      res.status(201).json(newTarif);
+      res.status(201).json({
+        message: "Тариф добавлен",
+        tarifs: newTarif,
+      });
     });
   });
 });
@@ -139,19 +144,15 @@ app.delete("/api/home-tarif/:id", (req, res) => {
       fs.unlink(imagePath, (err) => {
         if (err) {
           console.error("Ошибка удаления изображения:", err);
-          return res
-            .status(200)
-            .json({
-              message: "Тариф удален, но изображение не удалось удалить",
-              tarif: tarifToDelete,
-            });
-        }
-        res
-          .status(200)
-          .json({
-            message: "Тариф и изображение успешно удалены",
+          return res.status(200).json({
+            message: "Тариф удален, но изображение не удалось удалить",
             tarif: tarifToDelete,
           });
+        }
+        res.status(200).json({
+          message: "Тариф и изображение успешно удалены",
+          tarif: tarifToDelete,
+        });
       });
     });
   });
@@ -218,6 +219,156 @@ app.get("/api/home-tarif/stats", (req, res) => {
     }
     const jsonData = JSON.parse(data);
     const addedCount = jsonData["home-tarif"].length;
+    const updatedCount = jsonData.stats.updatedCount;
+    const deletedCount = jsonData.stats.deletedCount;
+    res.json({
+      added: addedCount,
+      updated: updatedCount,
+      deleted: deletedCount,
+    });
+  });
+});
+
+//                           eqpt CRUD
+
+// get data eqpt
+app.get("/api/eqpt", (req, res) => {
+  const dataPath = path.join(__dirname, "data", "eqpt.json");
+  fs.readFile(dataPath, "utf8", (err, data) => {
+    if (err) {
+      return res.status(500).send("Ошибка чтения данных");
+    }
+    const jsonData = JSON.parse(data);
+    res.json(jsonData["eqpt"]);
+  });
+});
+
+// add data eqpt
+app.post("/api/eqpt", upload.single("image"), (req, res) => {
+  const dataPath = path.join(__dirname, "data", "eqpt.json");
+  fs.readFile(dataPath, "utf8", (err, data) => {
+    if (err) {
+      return res.status(500).send("Ошибка чтения данных");
+    }
+    const jsonData = JSON.parse(data);
+    const newId =
+      jsonData["eqpt"].length > 0
+        ? Math.max(...jsonData["eqpt"].map((t) => t.id)) + 1
+        : 1;
+
+    const newEqpt = {
+      id: newId,
+      modele: req.body.modele,
+      type: req.body.type,
+      bandwidth: req.body.bandwidth,
+      coverage: req.body.coverage,
+      support: req.body.support,
+      price: req.body.price,
+      image: req.file ? `/data/${req.file.filename}` : null,
+    };
+    jsonData["eqpt"].push(newEqpt);
+    jsonData.stats.addedCount++;
+    fs.writeFile(dataPath, JSON.stringify(jsonData, null, 2), (err) => {
+      if (err) {
+        return res.status(500).send("Ошибка записи данных");
+      }
+      res
+        .status(201)
+        .json({ message: "Оборудование добавлено", eqpt: newEqpt });
+    });
+  });
+});
+
+// delete data eqpt
+app.delete("/api/eqpt/:id", (req, res) => {
+  const eqptId = parseInt(req.params.id, 10);
+  const dataPath = path.join(__dirname, "data", "eqpt.json");
+  fs.readFile(dataPath, "utf8", (err, data) => {
+    if (err) {
+      return res.status(500).send("Ошибка чтения данных");
+    }
+    const jsonData = JSON.parse(data);
+    const eqptIndex = jsonData["eqpt"].findIndex((t) => t.id === eqptId);
+    if (eqptIndex === -1) {
+      return res.status(404).send("Оборудование не найдено");
+    }
+    const eqptToDelete = jsonData["eqpt"][eqptIndex];
+    const imagePath = path.join(__dirname, eqptToDelete.image);
+    jsonData["eqpt"].splice(eqptIndex, 1);
+    jsonData.stats.deletedCount++;
+    fs.writeFile(dataPath, JSON.stringify(jsonData, null, 2), (err) => {
+      if (err) {
+        return res.status(500).send("Ошибка записи данных");
+      }
+      fs.unlink(imagePath, (err) => {
+        if (err) {
+          console.error("Ошибка удаления изображения:", err);
+          return res.status(200).json({
+            message: "Оборудование удален, но изображение не удалось удалить",
+            eqpt: eqptToDelete,
+          });
+        }
+        res.status(200).json({
+          message: "Оборудование и изображение успешно удалены",
+          eqpt: eqptToDelete,
+        });
+      });
+    });
+  });
+});
+
+// edit data eqpt
+app.put("api/eqpt/:id", upload.single("image"), (req, res) => {
+  const eqptId = parseInt(req.params.id, 10);
+  const dataPath = path.join(__dirname, "data", "eqpt.json");
+  fs.readFile(dataPath, "utf8", (err, data) => {
+    if (err) {
+      return res.status(500).send("Ошибка чтения данных");
+    }
+    const jsonData = JSON.parse(data);
+    const eqptIndex = jsonData["eqpt"].findIndex((t) => t.id === eqptId);
+    if (eqptIndex === -1) {
+      return res.status(404).send("Оборудование не найдено");
+    }
+    const existingEqpt = jsonData["eqpt"][eqptIndex];
+    existingEqpt.modele = req.body.modele || existingEqpt.modele;
+    existingEqpt.type = req.body.type || existingEqpt.type;
+    existingEqpt.bandwidth = req.body.bandwidth || existingEqpt.bandwidth;
+    existingEqpt.coverage = req.body.coverage || existingEqpt.coverage;
+    existingEqpt.support = req.body.support || existingEqpt.support;
+    existingEqpt.price = req.body.price || existingEqpt.price;
+    if (req.file) {
+      const newImagePath = `/data/${req.file.filename}`;
+      const oldImagePath = path.join(__dirname, existingEqpt.image);
+      existingEqpt.image = newImagePath;
+      fs.unlink(oldImagePath, (err) => {
+        if (err) {
+          console.error("Ошибка удаления старого изображения:", err);
+        }
+      });
+    }
+    jsonData.stats.updatedCount++;
+    fs.writeFile(dataPath, JSON.stringify(jsonData, null, 2), (err) => {
+      if (err) {
+        return res.status(500).send("Ошибка записи данных");
+      }
+      res.status(200).json({
+        message: "Оборудование и изображение успешно изменены",
+        eqpt: existingEqpt,
+      });
+    });
+  });
+});
+
+// get eqpt stats
+app.get("/api/eqpt/stats", (req, res) => {
+  const dataPath = path.join(__dirname, "data", "eqpt.json");
+  fs.readFile(dataPath, "utf8", (err, data) => {
+    if (err) {
+      return res.status(500).send("Ошибка чтения данных");
+    }
+    const jsonData = JSON.parse(data);
+    const addedCount = jsonData["eqpt"].length;
     const updatedCount = jsonData.stats.updatedCount;
     const deletedCount = jsonData.stats.deletedCount;
     res.json({
@@ -351,19 +502,15 @@ app.delete("/api/news/:id", (req, res) => {
       fs.unlink(imagePath, (err) => {
         if (err) {
           console.error("Ошибка удаления изображения:", err);
-          return res
-            .status(200)
-            .json({
-              message: "Новость удалена, но изображение не удалось удалить",
-              news: newsToDelete,
-            });
-        }
-        res
-          .status(200)
-          .json({
-            message: "Новость и изображение успешно удалены",
+          return res.status(200).json({
+            message: "Новость удалена, но изображение не удалось удалить",
             news: newsToDelete,
           });
+        }
+        res.status(200).json({
+          message: "Новость и изображение успешно удалены",
+          news: newsToDelete,
+        });
       });
     });
   });
@@ -388,7 +535,7 @@ app.get("/api/news/stats", (req, res) => {
   });
 });
 
-//                                                                           Faqs's CRUD
+//                                                                            Faqs's CRUD
 // Get all FAQs
 app.get("/api/faq", (req, res) => {
   const dataPath = path.join(__dirname, "data", "faq.json");

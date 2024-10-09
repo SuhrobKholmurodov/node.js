@@ -1,0 +1,49 @@
+{
+  "eqpt": [
+    {
+      "id": 1,
+      "modele": "WiFi Роутер",
+      "type": "D-Link DIR-842/R7",
+      "bandwidth": "300",
+      "coverage": "70",
+      "supports": "10",
+      "price": "400",
+      "image": "/data/eqpt1.jpg"
+    },
+    {
+      "id": 2,
+      "modele": "WiFi Роутер",
+      "type": "D-Link DIR-842/R7",
+      "bandwidth": "300",
+      "coverage": "70",
+      "supports": "10",
+      "price": "400",
+      "image": "/data/eqpt2.jpg"
+    },
+    {
+      "id": 3,
+      "modele": "WiFi Роутер",
+      "type": "D-Link DIR-842/R7",
+      "bandwidth": "300",
+      "coverage": "70",
+      "supports": "10",
+      "price": "400",
+      "image": "/data/eqpt3.jpg"
+    },
+    {
+      "id": 4,
+      "modele": "WiFi Роутер",
+      "type": "D-Link DIR-842/R7",
+      "bandwidth": "300",
+      "coverage": "70",
+      "supports": "10",
+      "price": "400",
+      "image": "/data/eqpt4.jpg"
+    }
+  ],
+  "stats": {
+    "updatedCount": 0,
+    "deletedCount": 6,
+    "addedCount": 3
+  }
+}
