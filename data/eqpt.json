@@ -27,7 +27,7 @@
       "bandwidth": "300",
       "coverage": "70",
       "supports": "10",
-      "price": "400",
+      "price": "450",
       "image": "/data/eqpt3.jpg"
     },
     {
@@ -43,7 +43,7 @@
   ],
   "stats": {
     "updatedCount": 0,
-    "deletedCount": 6,
-    "addedCount": 3
+    "deletedCount": 8,
+    "addedCount": 5
   }
 }

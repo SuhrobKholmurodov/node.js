@@ -44,10 +44,19 @@
       "accessSpeed": "20 ",
       "price": "450",
       "image": "/data/fiveperson.jpg"
+    },
+    {
+      "id": 6,
+      "name": "1",
+      "speed": "1",
+      "traffic": "1",
+      "accessSpeed": "1",
+      "price": "1",
+      "image": "/data/about.PNG"
     }
   ],
   "stats": {
-    "updatedCount": 82,
-    "deletedCount": 31
+    "updatedCount": 18,
+    "deletedCount": 12
   }
 }

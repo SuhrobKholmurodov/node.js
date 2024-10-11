@@ -1,0 +1,22 @@
+{
+  "swiper-data": [
+    {
+      "id": 1,
+      "title": "Happe new year!",
+      "description": "Today is the first day of the year for the first time in the year for the first time in the year for the first time in the year for the first time in the year for the first time in the year for the first time in the year for the first time in the year for the first time in the year for the first",
+      "image": "/data/onebunner.png"
+    },
+    {
+      "id": 2,
+      "title": "Happe new year!",
+      "description": "Today is the first day of the year for the first time in the year for the first time in the year for the first time in the year for the first time in the year for the first time in the year for the first time in the year for the first time in the year for the first time in the year for the first",
+      "image": "/data/eqpt2.jpg"
+    },
+    {
+      "id": 3,
+      "title": "Happe new year!",
+      "description": "Today is the first day of the year for the first time in the year for the first time in the year for the first time in the year for the first time in the year for the first time in the year for the first time in the year for the first time in the year for the first time in the year for the first",
+      "image": "/data/eqpt3.jpg"
+    }
+  ]
+}
