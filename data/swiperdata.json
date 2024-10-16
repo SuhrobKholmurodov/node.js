@@ -3,19 +3,22 @@
     {
       "id": 1,
       "title": "Happe new year!",
-      "description": "Today is the first day of the year for the first time in the year for the first time in the year for the first time in the year for the first time in the year for the first time in the year for the first time in the year for the first time in the year for the first time in the year for the first",
+      "textColor": "#ffffff",
+      "description": "Today is first day of year for first time in year for first time in year for first time in year for first time in year for first time in year for first time in year for first time in year for first time in year for first",
       "image": "/data/onebunner.png"
     },
     {
       "id": 2,
       "title": "Happe new year!",
-      "description": "Today is the first day of the year for the first time in the year for the first time in the year for the first time in the year for the first time in the year for the first time in the year for the first time in the year for the first time in the year for the first time in the year for the first",
+      "textColor": "#ffffff",
+      "description": "Today is first day of year for first time in year for first time in year for first time in year for first time in year for first time in year for first time in year for first time in year for first time in year for first",
       "image": "/data/eqpt2.jpg"
     },
     {
       "id": 3,
       "title": "Happe new year!",
-      "description": "Today is the first day of the year for the first time in the year for the first time in the year for the first time in the year for the first time in the year for the first time in the year for the first time in the year for the first time in the year for the first time in the year for the first",
+      "textColor": "#ffffff",
+      "description": "Today is first day of year for first time in year for first time in year for first time in year for first time in year for first time in year for first time in year for first time in year for first time in year for first",
       "image": "/data/eqpt3.jpg"
     }
   ]

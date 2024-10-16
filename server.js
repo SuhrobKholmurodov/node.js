@@ -195,7 +195,7 @@ app.put("/api/home-tarif/:id", upload.single("image"), (req, res) => {
           console.error("Ошибка удаления старого изображения:", err);
         }
       });
-    } 
+    }
 
     jsonData.stats.updatedCount++;
 
@@ -319,7 +319,6 @@ app.put(
   upload.single("image", (req, res) => {
     const swiperId = parseInt(req.params.id, 10);
     const dataPath = path.join(__dirname, "data", "swiperdata.json");
-
     fs.readFile(dataPath, "utf8", (err, data) => {
       if (err) {
         return res.status(500).send("Ошибка чтения данных");
@@ -448,7 +447,7 @@ app.delete("/api/eqpt/:id", (req, res) => {
 });
 
 // edit data eqpt
-app.put("api/eqpt/:id", upload.single("image"), (req, res) => {
+app.put("/api/eqpt/:id", upload.single("image"), (req, res) => {
   const eqptId = parseInt(req.params.id, 10);
   const dataPath = path.join(__dirname, "data", "eqpt.json");
   fs.readFile(dataPath, "utf8", (err, data) => {

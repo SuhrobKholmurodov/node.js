@@ -6,7 +6,7 @@
       "speed": "1",
       "traffic": "Безлимитный",
       "accessSpeed": "10",
-      "price": "340",
+      "price": "350",
       "image": "/data/oneperson.jpg"
     },
     {
@@ -44,19 +44,10 @@
       "accessSpeed": "20 ",
       "price": "450",
       "image": "/data/fiveperson.jpg"
-    },
-    {
-      "id": 6,
-      "name": "1",
-      "speed": "1",
-      "traffic": "1",
-      "accessSpeed": "1",
-      "price": "1",
-      "image": "/data/about.PNG"
     }
   ],
   "stats": {
-    "updatedCount": 18,
-    "deletedCount": 12
+    "updatedCount": 22,
+    "deletedCount": 13
   }
 }
