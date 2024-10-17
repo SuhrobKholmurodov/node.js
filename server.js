@@ -257,6 +257,7 @@ app.post("/api/swiper-data", upload.single("image"), (req, res) => {
       id: newId,
       title: req.body.title,
       description: req.body.description,
+      showbtn: req.body.showbtn,
       image: req.file ? `/data/${req.file.filename}` : null,
     };
     jsonData["swiper-data"].push(newSwiper);
@@ -314,49 +315,52 @@ app.delete("/api/swiper-data/:id", (req, res) => {
 });
 
 // edit data swiper
-app.put(
-  "/api/swiper-data/:id",
-  upload.single("image", (req, res) => {
-    const swiperId = parseInt(req.params.id, 10);
-    const dataPath = path.join(__dirname, "data", "swiperdata.json");
-    fs.readFile(dataPath, "utf8", (err, data) => {
-      if (err) {
-        return res.status(500).send("Ошибка чтения данных");
-      }
-      const jsonData = JSON.parse(data);
-      const swiperIndex = jsonData["swiper-data"].findIndex(
-        (s) => s.id === swiperId
-      );
-      if (swiperIndex === -1) {
-        return res.status(404).send("Слайдер не найден");
-      }
-      const existingSwiper = jsonData["swiper-data"][swiperIndex];
+app.put("/api/swiper-data/:id", upload.single("image"), (req, res) => {
+  const swiperId = parseInt(req.params.id, 10);
+  const dataPath = path.join(__dirname, "data", "swiperdata.json");
 
-      existingSwiper.title = req.body.title || existingSwiper.title;
-      existingSwiper.description =
-        req.body.description || existingSwiper.description;
-      if (req.file) {
-        const newImagePath = `/data/${req.file.filename}`;
-        const oldImagePath = path.join(__dirname, existingSwiper.image);
-        existingSwiper.image = newImagePath;
+  fs.readFile(dataPath, "utf8", (err, data) => {
+    if (err) {
+      return res.status(500).send("Ошибка чтения данных");
+    }
 
-        fs.unlink(oldImagePath, (err) => {
-          if (err) {
-            console.error("Ошибка удаления старого изображения:", err);
-          }
-        });
-      }
-      fs.writeFile(dataPath, JSON.stringify(jsonData, null, 2), (err) => {
+    const jsonData = JSON.parse(data);
+    const swiperIndex = jsonData["swiper-data"].findIndex(
+      (s) => s.id === swiperId
+    );
+
+    if (swiperIndex === -1) {
+      return res.status(404).send("Слайдер не найден");
+    }
+
+    const existingSwiper = jsonData["swiper-data"][swiperIndex];
+    existingSwiper.title = req.body.title || existingSwiper.title;
+    existingSwiper.description =
+      req.body.description || existingSwiper.description;
+
+    if (req.file) {
+      const newImagePath = `/data/${req.file.filename}`;
+      const oldImagePath = path.join(__dirname, existingSwiper.image);
+      existingSwiper.image = newImagePath;
+
+      fs.unlink(oldImagePath, (err) => {
         if (err) {
-          return res.static(500).send("Ошибка записи данных");
+          console.error("Ошибка удаления старого изображения:", err);
         }
-        res
-          .static(200)
-          .json({ message: "Слайд успешно обновлен", slide: existingSwiper });
+      });
+    }
+
+    fs.writeFile(dataPath, JSON.stringify(jsonData, null, 2), (err) => {
+      if (err) {
+        return res.status(500).send("Ошибка записи данных");
+      }
+      res.status(200).json({
+        message: "Слайд успешно обновлен",
+        slide: existingSwiper,
       });
     });
-  })
-);
+  });
+});
 
 //                           eqpt CRUD
 
@@ -459,7 +463,7 @@ app.put("/api/eqpt/:id", upload.single("image"), (req, res) => {
     if (eqptIndex === -1) {
       return res.status(404).send("Оборудование не найдено");
     }
-    const existingEqpt = jsonData["eqpt"][eqptIndex];
+    const existingEqpt = jsonData["eqpt"][eqptIndex];  
     existingEqpt.modele = req.body.modele || existingEqpt.modele;
     existingEqpt.type = req.body.type || existingEqpt.type;
     existingEqpt.bandwidth = req.body.bandwidth || existingEqpt.bandwidth;

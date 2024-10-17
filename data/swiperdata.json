@@ -2,24 +2,27 @@
   "swiper-data": [
     {
       "id": 1,
-      "title": "Happe new year!",
-      "textColor": "#ffffff",
+      "title": "happy new year",
+      "textColor": "white",
       "description": "Today is first day of year for first time in year for first time in year for first time in year for first time in year for first time in year for first time in year for first time in year for first time in year for first",
-      "image": "/data/onebunner.png"
+      "image": "/data/onebunner.png",
+      "showbtn": true
     },
     {
       "id": 2,
-      "title": "Happe new year!",
+      "title": " ",
       "textColor": "#ffffff",
-      "description": "Today is first day of year for first time in year for first time in year for first time in year for first time in year for first time in year for first time in year for first time in year for first time in year for first",
-      "image": "/data/eqpt2.jpg"
+      "description": " ",
+      "image": "/data/swiperimage2.png",
+      "showbtn": false
     },
     {
       "id": 3,
-      "title": "Happe new year!",
+      "title": " ",
       "textColor": "#ffffff",
-      "description": "Today is first day of year for first time in year for first time in year for first time in year for first time in year for first time in year for first time in year for first time in year for first time in year for first",
-      "image": "/data/eqpt3.jpg"
+      "description": " ",
+      "image": "/data/swiperimage1.png",
+      "showbtn": true
     }
   ]
 }
