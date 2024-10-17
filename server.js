@@ -64,7 +64,7 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage });
 
-//                                                                       Tarif's CRUD
+// Tarif's CRUD
 // Get data tarif
 app.get("/api/home-tarif", (req, res) => {
   const dataPath = path.join(__dirname, "data", "homeTarif.json");
@@ -229,7 +229,7 @@ app.get("/api/home-tarif/stats", (req, res) => {
   });
 });
 
-//                             swiper CRUD
+// swiper CRUD
 app.get("/api/swiper-data", (req, res) => {
   const dataPath = path.join(__dirname, "data", "swiperdata.json");
   fs.readFile(dataPath, "utf8", (err, data) => {
@@ -362,7 +362,7 @@ app.put("/api/swiper-data/:id", upload.single("image"), (req, res) => {
   });
 });
 
-//                           eqpt CRUD
+// eqpt CRUD
 
 // get data eqpt
 app.get("/api/eqpt", (req, res) => {
@@ -512,7 +512,7 @@ app.get("/api/eqpt/stats", (req, res) => {
   });
 });
 
-//                                                                        News's CRUD
+// News's CRUD
 // Get all news articles
 app.get("/api/news", (req, res) => {
   const dataPath = path.join(__dirname, "data", "news.json");
@@ -771,25 +771,6 @@ app.delete("/api/faq/:id", (req, res) => {
       res
         .status(200)
         .json({ message: "FAQ успешно удалена", faq: faqToDelete });
-    });
-  });
-});
-
-// get faqs stats
-app.get("/api/faq/stats", (req, res) => {
-  const dataPath = path.join(__dirname, "data", "faq.json");
-  fs.readFile(dataPath, "utf8", (err, data) => {
-    if (err) {
-      return res.status(500).send("Ошибка чтения данных");
-    }
-    const jsonData = JSON.parse(data);
-    const addedCount = jsonData["faq"].length;
-    const updatedCount = jsonData.stats.updatedCount;
-    const deletedCount = jsonData.stats.deletedCount;
-    res.json({
-      added: addedCount,
-      updated: updatedCount,
-      deleted: deletedCount,
     });
   });
 });
