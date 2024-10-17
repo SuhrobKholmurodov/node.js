@@ -745,6 +745,7 @@ app.put("/api/faq/:id", (req, res) => {
   });
 });
 
+// Delete an FAQ entry 
 app.delete("/api/faq/:id", (req, res) => {
   const faqId = parseInt(req.params.id, 10);
   const dataPath = path.join(__dirname, "data", "faq.json");
