@@ -703,7 +703,6 @@ app.post("/api/faq", (req, res) => {
     };
 
     jsonData["faq"].push(newFaq);
-    jsonData.stats.updatedCount++;
     fs.writeFile(dataPath, JSON.stringify(jsonData, null, 2), (err) => {
       if (err) {
         return res.status(500).send("Ошибка записи данных");
@@ -732,7 +731,6 @@ app.put("/api/faq/:id", (req, res) => {
     const existingFaq = jsonData["faq"][faqIndex];
     existingFaq.question = req.body.question || existingFaq.question;
     existingFaq.answer = req.body.answer || existingFaq.answer;
-    jsonData.stats.updatedCount++;
 
     fs.writeFile(dataPath, JSON.stringify(jsonData, null, 2), (err) => {
       if (err) {
@@ -762,7 +760,6 @@ app.delete("/api/faq/:id", (req, res) => {
 
     const faqToDelete = jsonData["faq"][faqIndex];
     jsonData["faq"].splice(faqIndex, 1);
-    jsonData.stats.deletedCount++;
 
     fs.writeFile(dataPath, JSON.stringify(jsonData, null, 2), (err) => {
       if (err) {
